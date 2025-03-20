@@ -1,0 +1,182 @@
+/* Définition des couleurs principales */
+:root {
+    --primary-color: #84c7ec; /* Bleu clair */
+    --secondary-color: #f15de2; /* Rose vif */
+    --background-color: #f4f1f3; /* Fond gris clair */
+    --error-bg-color: #f8d7da; /* Fond rouge clair pour erreurs */
+    --success-bg-color: #d4edda; /* Fond vert clair pour succès */
+    --text-color: #333; /* Couleur du texte principale */
+    --white-color: #fff; /* Blanc */
+    --highlight-color: #f1c3ed; /* Rose pâle pour mise en avant */
+}
+
+/* Suppression des marges et paddings par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style du corps de la page */
+body {
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, var(--white-color), var(--primary-color));
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+}
+
+/* Image de fond semi-transparente */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../media-img/image-italie.jpg") no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* En-tête */
+header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 40px 0;
+    text-align: center;
+    border-bottom: 2px solid #e7dcec;
+}
+
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Boutons de navigation */
+nav .btn, nav .manage-btn {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    border: 2px solid var(--secondary-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Effet au survol des boutons */
+nav .btn:hover, nav .manage-btn:hover {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+}
+
+/* Contenu principal */
+main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section galerie */
+.gallery {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.gallery h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Grille des médias (images/vidéos) */
+.media-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Style des éléments média */
+.media-item {
+    background-color: var(--highlight-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Effet au survol des médias */
+.media-item:hover {
+    transform: translateY(-10px);
+}
+
+.media-img, .media-video {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Pied de page */
+footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 60px;
+    border-top: 2px solid #f1e5f0;
+}
+
+/* Messages d'alerte */
+.message {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Message de succès */
+.message.success {
+    background-color: var(--success-bg-color);
+    color: #85d798;
+    border: 1px solid #c3e6cb;
+}
+
+/* Message d'erreur */
+.message.error {
+    background-color: var(--error-bg-color);
+    color: #e11a2e;
+    border: 1px solid #f5c6cb;
+}
+
+/* Description sous les médias */
+.media-description {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Adaptation aux petits écrans */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    nav .btn, nav .manage-btn {
+        padding: 8px 20px;
+    }
+    
+    .gallery h2 {
+        font-size: 2rem;
+    }
+    
+    .media-container {
+        grid-template-columns: 1fr;
+    }
+}

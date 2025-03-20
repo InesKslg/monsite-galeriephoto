@@ -1,0 +1,66 @@
+Inscription d'un utilisateur sécurisé
+
+<?php
+function insertUser($pdo, $login, $password) {
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("INSERT INTO utilisateurs (login, mot_de_passe) VALUES (:login, :password)");
+    return $stmt->execute(['login' => $login, 'password' => $hashedPassword]);
+}
+?>
+
+Récupérer un utilisateur par login pour la connexion
+
+<?php
+function getUser($pdo, $login) {
+    $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE login = :login");
+    $stmt->execute(['login' => $login]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
+
+Récupération des photos publiques
+
+<?php
+function getPublicPhotos($pdo) {
+    $stmt = $pdo->prepare("SELECT * FROM photos WHERE public = :public ORDER BY date_added DESC");
+    $stmt->execute(['public' => 1]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+?>
+
+Ajout d'une photo avec statut public ou privé
+
+<?php
+function addPhoto($pdo, $photoUrl, $description, $public) {
+    $stmt = $pdo->prepare("INSERT INTO photos (photo_url, description, public, date_added) VALUES (:photo_url, :description, :public, NOW())");
+    return $stmt->execute([
+        'photo_url'   => $photoUrl,
+        'description' => $description,
+        'public'      => $public
+    ]);
+}
+?>
+
+Suppression d'une photo par ID
+
+<?php
+function deletePhoto($pdo, $photoId) {
+    $stmt = $pdo->prepare("DELETE FROM photos WHERE id = :photo_id");
+    return $stmt->execute(['photo_id' => $photoId]);
+}
+?>
+
+Mise à jour du statut d'une photo
+
+<?php
+function updatePhotoStatus($pdo, $photoId, $newStatus) {
+    $stmt = $pdo->prepare("UPDATE photos SET public = :newStatus WHERE id = :photo_id");
+    return $stmt->execute([
+        'newStatus' => $newStatus,
+        'photo_id'  => $photoId
+    ]);
+}
+?>
+
+
+
